@@ -243,7 +243,7 @@ void Calendar::DeleteEvent() {
 void Calendar::Save() {
     //string filename = ;
     ofstream file;
-    file.open("event.boni", ios::app);
+    file.open("db.event", ios::app);
 
     for (int i = 0; i < events.size(); ++i) {
         file << events[i].date.getYear()
@@ -264,13 +264,17 @@ void Calendar::Load() {
     events.clear();
 
     ifstream file;
-    file.open("event.boni", ios::app);
+    file.open("db.event", ios::app);
+    file.seekg(0, ios::end); // put the "cursor" at the end of the file
+    int length = file.tellg(); // find the position of the cursor
 
     if (!file.is_open()) {
         cerr << "Unable to open the file: " << endl;
         cerr << "Abort loading events." << endl;
         return;
     }
+
+
 
     while (true) {
         Event event;
@@ -292,5 +296,7 @@ void Calendar::Load() {
 
     file.close();
     cout << "Load from file success." << endl;
-
+    if (length == 0) {
+        cout << "The are no event currently stored\n";
+    }
 }

@@ -23,9 +23,9 @@ int main(int argc, char** argv) {
     system("Color 1A");
     Calendar calendar;
     //Create event data file if it doesn't exist
-    ifstream ifs("event.boni");
+    ifstream ifs("db.event");
     if (!ifs.is_open()) {
-        ofstream outfile("event.boni"); // create file
+        ofstream outfile("db.event"); // create file
     }
     calendar.Draw(); // print calendar 
     calendar.Run(); //Menu options
